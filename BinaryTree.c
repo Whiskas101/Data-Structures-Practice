@@ -20,14 +20,19 @@ void inorder(struct Node * self);
 void postorder(struct Node * self);
 void preorder(struct Node * self);
 
+//constructor
+// Ik C lang doesn't have constructors, but I like to think of this as one, as it achieves the same thing functionally
 Node * initNode(Node * self, int val);
+
 Node * initNode(Node * self, int val){
     
     //allocating memory to a pointer to the Node
-    self = (Node * )malloc(sizeof(Node));
+    self = (Node *)malloc(sizeof(Node));
 
     //setting the user value at the node
     self->val = val;
+    self->left = NULL;
+    self->right = NULL;
 
     //connecting the function pointers to the proper functions
     self->preorder = preorder;
@@ -38,8 +43,8 @@ Node * initNode(Node * self, int val){
     return self;
 }
 
-void addNode(Node * Root, int val);
-void addNode(Node * Root, int val){
+void addNode(Node * Root,char LR, int val);
+void addNode(Node * Root,char LR, int val){
 
     
     Node * TempNode = (Node * )malloc(sizeof(Node));
@@ -49,9 +54,23 @@ void addNode(Node * Root, int val){
     if(Root == NULL){
         TempNode->left = NULL;
         TempNode->right = NULL;
-    }else{
-        
 
+        Root = TempNode;
+
+    //checking if the L or R (left or right) node is NULL or filled
+    }else if (LR == 'L'){
+        if(Root->left == NULL){
+            Root->left = TempNode;
+        }else{
+            printf("\n Left child occupied");
+        }
+
+    }else if(LR == 'R'){
+        if(Root->right== NULL){
+            Root->right = TempNode;
+        }else{
+            printf("\n Right child occupied");
+        }
     }
 
 }
@@ -71,10 +90,10 @@ void preorder(struct Node * self){
 
 int main(){
 
-    Node* RootNode = initNode(RootNode, 10);
-
-    
-
+    Node* RootNode = initNode(RootNode, 10); 
+    addNode(RootNode, 'L', 11);
+    addNode(RootNode, 'R', 12);
+    printf("%d", RootNode->right->val);
     return 0;
 
 }
