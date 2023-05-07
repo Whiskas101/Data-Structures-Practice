@@ -47,13 +47,12 @@ void addNode(Node * Root,char LR, int val);
 void addNode(Node * Root,char LR, int val){
 
     
-    Node * TempNode = (Node * )malloc(sizeof(Node));
+    Node * TempNode = initNode(TempNode, val);
     TempNode->val = val;
 
     //if tree doesnt exist, we simply add a root node, with NULL children
     if(Root == NULL){
-        TempNode->left = NULL;
-        TempNode->right = NULL;
+        
 
         Root = TempNode;
 
