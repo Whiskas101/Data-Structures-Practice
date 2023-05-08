@@ -9,14 +9,14 @@ struct Node{
     struct Node* right;
 
     void (*preorder)(struct Node * );
-    void (*inorder)(struct Node * );
+    int (*inorder)(struct Node * );
     void (*postorder)(struct Node * );
 
 };
 //renaming "struct Node" to just "Node" because time is of the essence (its really not)
 typedef struct Node Node;
 
-void inorder(struct Node * self);
+int inorder(struct Node * self);
 void postorder(struct Node * self);
 void preorder(struct Node * self);
 
@@ -76,11 +76,31 @@ void addNode(Node * Root,char LR, int val){
 
 
 
-void inorder(struct Node * self){
-    printf("pretend this is inorder output");
+int inorder(struct Node * self){
+    
+    //recursive approach because using the iterative approach needs a stack to be used, which is annoying to think of
+    //Inorder follows the following -> leftChild -> root -> rightChild
+
+    //base case
+    //if we reach a leaf node (a node with no children)
+
+    if(self != NULL){
+        
+        inorder(self->left);
+        printf(" %d,", self->val);
+        inorder(self->right);
+    }
+
+    
+
+
 }
 void postorder(struct Node * self){
-    printf("pretend this is postorder output");
+    
+
+    
+
+
 }
 void preorder(struct Node * self){
     printf("pretend this is preorder output");
@@ -91,8 +111,13 @@ int main(){
 
     Node* RootNode = initNode(RootNode, 10); 
     addNode(RootNode, 'L', 11);
-    addNode(RootNode, 'R', 12);
-    printf("%d", RootNode->right->val);
+    addNode(RootNode, 'R', 92);
+    addNode(RootNode->left, 'L', 12);
+
+    
+    
+
+    inorder(RootNode);
     return 0;
 
 }
