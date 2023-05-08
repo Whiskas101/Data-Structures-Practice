@@ -97,18 +97,40 @@ int inorder(struct Node * self){
 }
 void postorder(struct Node * self){
     
+    //post order follows -> leftChild -> rightChild -> root
 
-    
+    if(self != NULL){
+
+        postorder(self->left);
+        postorder(self->right);
+        printf(" %d,", self->val);
+
+
+    }
+
 
 
 }
 void preorder(struct Node * self){
-    printf("pretend this is preorder output");
+
+    //preorder follows -> root -> leftChild -> rightChild
+
+    if(self  != NULL){
+
+        printf(" %d,", self->val);
+        preorder(self->left);   
+        preorder(self->right);
+
+
+    }
+
+
 }
 
 
 int main(){
 
+    //creating a small tree
     Node* RootNode = initNode(RootNode, 10); 
     addNode(RootNode, 'L', 11);
     addNode(RootNode, 'R', 92);
@@ -116,8 +138,11 @@ int main(){
 
     
     
+    //testcases
+        //inorder(RootNode);
+        //postorder(RootNode);
+        //preorder(RootNode);
 
-    inorder(RootNode);
     return 0;
 
 }
